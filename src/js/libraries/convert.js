@@ -46,6 +46,16 @@ function convertStreams(videoBlob, setting) {
           type: 'video/mp4'
         });
         PostBlob(blob, "mp4");
+      } else if (setting == "png") {
+        var blob = new File([result.data], 'test.png', {
+          type: 'image/png'
+        });
+        PostBlob(blob, "png");
+      } else if (setting == "jpg") {
+        var blob = new File([result.data], 'test.jpg', {
+          type: 'image/jpeg'
+        });
+        PostBlob(blob, "jpg");
       }
     }
   };
@@ -69,6 +79,24 @@ function convertStreams(videoBlob, setting) {
           name: 'video.webm'
         }]
       });
+    } else if (setting == "png") {
+      worker.postMessage({
+        type: 'command',
+        arguments: '-i video.webm -vframes 1 -f image2 output.png'.split(' '),
+        files: [{
+          data: new Uint8Array(aab),
+          name: 'video.webm'
+        }]
+      });
+    } else if (setting == "jpg") {
+      worker.postMessage({
+        type: 'command',
+        arguments: '-i video.webm -vframes 1 -f image2 -q:v 2 output.jpg'.split(' '),
+        files: [{
+          data: new Uint8Array(aab),
+          name: 'video.webm'
+        }]
+      });
     }
   };
 }
@@ -79,8 +107,14 @@ function PostBlob(blob, type) {
     a.href = URL.createObjectURL(blob);
     if (type == "gif") {
       a.download = "animockup.gif";
-    } else {
+    } else if (type == "mp4") {
       a.download = "animockup.mp4";
+    } else if (type == "png") {
+      a.download = "animockup.png";
+    } else if (type == "jpg") {
+      a.download = "animockup.jpg";
+    } else {
+      a.download = "animockup.webm";
     }
     document.body.appendChild(a);
     a.click();
@@ -90,4 +124,21 @@ function PostBlob(blob, type) {
     }, 100);
     document.getElementById("download-button").classList.remove("downloading");
     document.getElementById("download-button").getElementsByTagName("span")[0].innerHTML = "Download";
+}
+
+// Direct canvas export function for PNG and JPG (more efficient for static images)
+function exportCanvasImage(canvas, format) {
+  return new Promise((resolve) => {
+    if (format === 'png') {
+      canvas.toBlob((blob) => {
+        PostBlob(blob, 'png');
+        resolve();
+      }, 'image/png', 1.0);
+    } else if (format === 'jpg') {
+      canvas.toBlob((blob) => {
+        PostBlob(blob, 'jpg');
+        resolve();
+      }, 'image/jpeg', 0.9);
+    }
+  });
 }

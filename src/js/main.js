@@ -650,6 +650,20 @@ $(document).ready(function(){
     } else if (exporttype == "Animated GIF") {
       $("#download-button span").html("Downloading...");
       convertStreams(new Blob(chunks,{type: "video/webm"}), "gif");
+    } else if (exporttype == "PNG image") {
+      $("#download-button span").html("Downloading...");
+      // Export direct from canvas for better quality and faster processing
+      exportCanvasImage(document.getElementById("canvasrecord"), "png").then(() => {
+        $("#download-button").removeClass("downloading");
+        $("#download-button span").html("Download");
+      });
+    } else if (exporttype == "JPG image") {
+      $("#download-button span").html("Downloading...");
+      // Export direct from canvas for better quality and faster processing
+      exportCanvasImage(document.getElementById("canvasrecord"), "jpg").then(() => {
+        $("#download-button").removeClass("downloading");
+        $("#download-button span").html("Download");
+      });
     }
   }
 
