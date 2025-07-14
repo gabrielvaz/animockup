@@ -3,7 +3,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/nano.min.css"/>
     <link rel="stylesheet" href="nice-select.css">
     <link rel="stylesheet" href="styles.css">
@@ -35,7 +34,7 @@
         <div id="upgrade-emoji">&#129300;</div>
         <div id="upgrade-title">Animockup isn't optimized for mobile</div>
         <div id="upgrade-subtitle">You need to use a computer to be able to create amazing mockups with Animockup.</div>
-        <a href="https://twitter.com/alyssaxuu" id="mobile-button">Other products by the maker</a>
+        <div id="mobile-button">Use a desktop computer</div>
       </div>
       <div id="mobile-overlay"></div>
     </div>
@@ -44,7 +43,7 @@
         <div id="upgrade-emoji">&#128549;</div>
         <div id="upgrade-title">No Safari support</div>
         <div id="upgrade-subtitle">Unfortunately, Animockup doesn’t work in Safari.<br><br>You can try using Animockup in another browser if you’d like to create amazing mockups.</div>
-        <a href="https://twitter.com/alyssaxuu" id="mobile-button">Other products by the maker</a>
+        <div id="mobile-button">Use a desktop computer</div>
       </div>
       <div id="mobile-overlay"></div>
     </div>
@@ -63,8 +62,8 @@
           <div class="upgrade-item"><img src="assets/check.svg"> High quality export</div>
           <div class="upgrade-item"><img src="assets/check.svg"> Support the developer 👋</div>
         </div>
-        <div id="upgrade-button">Upgrade</div>
-        <div id="sign-in-already">Already have an account? <span>Sign in</span></div>
+        <div id="upgrade-button" style="display: none;">Upgrade</div>
+        <div id="sign-in-already" style="display: none;">Already have an account? <span>Sign in</span></div>
       </div>
       <div id="upgrade-overlay"></div>
     </div>
@@ -93,8 +92,8 @@
                 <div class="section-right">
                   <div class="select-6">
                     <div class="option option-3 selected" value="webm">WEBM video</div>
-                    <div class="option option-3" value="mp4">MP4 video <span class="pro-label">PRO</span></div>
-                    <div class="option option-3 " value="gif">Animated GIF <span class="pro-label">PRO</span></div>
+                    <div class="option option-3" value="mp4">MP4 video</div>
+                    <div class="option option-3 " value="gif">Animated GIF</div>
                   </div>
                 </div>
               </div>
@@ -108,7 +107,7 @@
                 <div class="select-10">
                   <div class="option option-3 selected" value="webm">24 FPS</div>
                   <div class="option option-3" value="mp4">30 FPS</div>
-                  <div class="option option-3 " value="gif">60 FPS <span class="pro-label">PRO</span></div>
+                  <div class="option option-3 " value="gif">60 FPS</div>
                 </div>
               </div>
               <div class="section-input">
@@ -118,14 +117,14 @@
                     <div class="option option-3" value="webm">360p</div>
                     <div class="option option-3" value="mp4">420p</div>
                     <div class="option option-3 selected" value="gif">720p</div>
-                    <div class="option option-3 " value="gif">1080p <span class="pro-label">PRO</span></div>
+                    <div class="option option-3 " value="gif">1080p</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div id="download-bottom">
-            <div id="watermark"><div id="watermark-text">Remove watermark<span class="pro-label">PRO</span></div> <label class="switch"><input type="checkbox" disabled><span class="slider round"></span></label></div>
+            <div id="watermark"><div id="watermark-text">Remove watermark</div> <label class="switch"><input type="checkbox"><span class="slider round"></span></label></div>
             <div id="download-button"><img src="assets/download.png"> <span>Download</span></div>
           </div>
         </div>
@@ -138,7 +137,6 @@
         <div id="logo"><img id="logo" src="assets/logo.svg"> Animockup <span>2.0</span></div>
         <div id="user-settings"><img src="assets/user.svg"></div>
         <div id="user-settings-dropdown">
-          <div class="user-option" id="upgrade-dropdown">Upgrade to PRO</div>
           <div class="user-option" id="log-in">Log in</div>
         </div>
       </div>
@@ -251,14 +249,13 @@
         </div>
       </div>
       <div id="left-panel-actions">
-        <div id="copy">Upgrade to pro (only $10/month!) 🔥</div>
         <div id="download"><img src="assets/download.png"> Preview & download</div>
       </div>
     </div>
     <div id="content-area">
-      <a id="love" href="https://twitter.com/alyssaxuu" target="_blank">
-        Made with <img src="assets/heart.svg"> by Alyssa X
-      </a>
+      <div id="love">
+        Create amazing mockups
+      </div>
       <div id="top-selector">
         <div class="select-2">
           <div class="option option-2 selected" value="twitter-post">
@@ -383,11 +380,10 @@
       </div>
       <div id="help"><img src="assets/help.png"></div>
       <div id="help-dropdown">
-        <a href="https://twitter.com/alyssaxuu" target="_blank" class="help-option">Twitter</a>
-        <a href="mailto:hi@alyssax.com" target="_blank" class="help-option">Contact us</a>
-        <a target="_blank" href="https://www.notion.so/Refund-Policy-1444632146cb4ab6853b29ecf2572238" class="help-option">Refund Policy</a>
-        <a target="_blank" href="https://necessary-duke-5f6.notion.site/Terms-of-Service-dbac14eccc264448aff6be96f027733d" class="help-option">Terms of service</a>
-        <a target="_blank" href="https://necessary-duke-5f6.notion.site/Privacy-Policy-e95417ed50b3403a8bd8a534b9cb2b72" class="help-option">Privacy Policy</a>
+        <div class="help-option">Help & Support</div>
+        <div class="help-option">Contact Support</div>
+        <div class="help-option">Terms of Service</div>
+        <div class="help-option">Privacy Policy</div>
       </div>
     </div>
     <div id="text-options">
@@ -413,7 +409,6 @@
       <canvas id="canvas"></canvas>
     </div>
     <a href="https://www.producthunt.com/posts/animockup-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-animockup-2-0" id="ph" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=319895&theme=dark" alt="Animockup 2.0 - Create stunning product teasers with animated mockups | Product Hunt" style="width: 200px; height: 50px;" width="200" height="50" /></a>
-    <script src="https://cdn.paddle.com/paddle/paddle.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-analytics.js"></script>

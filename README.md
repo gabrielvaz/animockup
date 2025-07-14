@@ -1,54 +1,71 @@
-# Animockup
-![Demo](preview.gif)
-<br>
-Create stunning product teasers with animated mockups 🔥
+# Animockup - Free Version
 
-Animockup is a web-based tool that helps you create animated mockups for your product teasers. Add gradient backgrounds, browse through 20+ mockups, customize the export settings, and much more.
+Create stunning product teasers with animated mockups! 🔥
 
-[👉 Get it now](https://animockup.com)
+A powerful tool to create stunning animated mockups with **all premium features unlocked for free**.
 
-<a href="https://www.producthunt.com/posts/animockup-2-0?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-animockup-2-0" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=319895&theme=light" alt="Animockup 2.0 - Create stunning product teasers with animated mockups | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+## ✨ Features
 
-> You can support this project (and many others) through [GitHub Sponsors](https://github.com/sponsors/alyssaxuu)! ❤️
+- 📹 Add videos or images of your products
+- 📱 Choose from 20+ device mockups and frames
+- ✂️ Crop and reposition your content
+- 🎨 Customize backgrounds with gradients
+- ✏️ Add text and images
+- 🪄 Multiple animation presets
+- ⏱ Customizable duration and easing
+- 🎚️ Export in multiple formats (MP4, GIF, WEBM)
+- 🔓 **All premium features unlocked!**
 
-Made by [Alyssa X](https://twitter.com/alyssaxuu)
+## 🚀 Deploy to Vercel
 
-## Table of contents
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/gabrielvaz/animockup)
 
-- [Features](#features)
-- [Self-hosting Animockup](#self-hosting-animockup)
-- [Libraries used](#libraries-used)
+## 🛠️ Development
 
-## Features
-📹 Add a video or image of the product you want to showcase<br>
-📱 Choose from 20+ device mockups and frames<br>
-✂️ Crop and reposition your video in the mockup screen<br>
-🎨 Customize the background, with gradients<br>
-✏️ Add text and images to enhance your video<br>
-🪄 Choose the start and end animations from multiple presets<br>
-⏱ Set the video duration and change the easing of the animation<br>
-🎚️ Set the framerate, export format, and resolution<br>
-...and much more!<br>
+```bash
+# Clone the repository
+git clone https://github.com/gabrielvaz/animockup.git
+cd animockup
 
-## Self-hosting Animockup
-In order to self-host Animockup, you will need to make a few changes.
+# Start local server
+python3 -m http.server 3000 --directory src
 
-1. Create a [Firebase project](https://firebase.google.com/)<br>
-2. Update the firebaseConfig object in the [index.html](src/index.html) with your own values<br>
-3. Animockup uses Paddle for subscriptions. You can either remove it entirely, or update with your own values in the [main.js](src/main.js) and [api.php](src/api.php) files.
+# Open http://localhost:3000
+```
 
-## Libraries used
-- [jQuery](https://jquery.com/) - for better event handling and DOM manipulation
-- [FabricJs](http://fabricjs.com/) - for the interactive canvas
-- [CanvasRecorder.js](https://github.com/SMUsamaShah/CanvasRecorder) - for recording the canvas
-- [FFMPEG](https://www.ffmpeg.org/) - for converting the videos to different formats
-- [jQuery Nice Select](https://hernansartorio.com/jquery-nice-select/) - for better dropdowns
-- [Pickr](https://github.com/Simonwep/pickr) - for a better color picker
-- [Anime.js](https://animejs.com/) - for animating the mockups
-- [fix-webm-duration](https://github.com/yusitnikov/fix-webm-duration) - to make webm videos seekable
-- [Paddle](https://paddle.com/) - for handling subscription payments
-- [Firebase](https://firebase.com/) - for authentication
+## 📦 Project Structure
 
-#
+```
+├── src/                 # Frontend files
+│   ├── index.html      # Main application
+│   ├── styles.css      # Styling
+│   ├── js/            # JavaScript files
+│   └── assets/        # Images and mockups
+├── api/               # Serverless functions
+│   └── subscription.php
+└── vercel.json        # Vercel configuration
+```
 
-Feel free to reach out to me through email at hi@alyssax.com or [on Twitter](https://twitter.com/alyssaxuu) if you have any questions or feedback! Hope you find this useful 💜
+## 🔧 Firebase Setup (Optional)
+
+If you want to use Firebase authentication:
+
+1. Create a Firebase project
+2. Update the Firebase config in `src/index.html` (lines 424-431)
+3. Configure Firebase Authentication
+
+## 📝 Changes from Original
+
+- ✅ Removed Paddle subscription system
+- ✅ Unlocked all premium features
+- ✅ Removed payment integration
+- ✅ Optimized for Vercel deployment
+- ✅ Updated API structure
+
+## 📄 License
+
+This project is for educational and creative purposes.
+
+## 🤝 Contributing
+
+Feel free to submit issues and pull requests!

@@ -1325,10 +1325,7 @@ input:checked + .slider:before {
   font-weight: 600;
 }
 
-/* Paddle frame */
-.paddle-frame {
-  z-index: 9999999999!important;
-}
+/* Paddle removed */
 
 /* Scrollbar width */
 ::-webkit-scrollbar {

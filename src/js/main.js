@@ -66,18 +66,7 @@ $(document).ready(function(){
 			canvasrecord.getItemById("watermark").set({opacity: 0});
 			canvasrecord.renderAll();
 		}
-		window.setTimeout(function(){
-			$.ajax({
-				type:"GET",
-				crossDomain: true,
-				dataType: 'jsonp',
-				url:"https://checkout.paddle.com/api/1.0/order?checkout_id="+data.eventData.checkout.id,
-				success: function(newdata){
-					console.log(newdata)
-					saveSubscription(newdata.order.subscription_id);
-				}
-			})
-		}, 10000);
+		// Paddle removed - no need for external calls
   }
 
   // Cancel checkout
@@ -86,29 +75,20 @@ $(document).ready(function(){
   }
 
   function checkSubscription(id) {
-    if (id == undefined) {
-      return;
+    // Always enable premium features
+    premiumuser = true;
+    $(".pro-label").addClass("premium-on");
+    $(".pro-label").css({display:"none"});
+    $("#watermark input").attr("disabled", false);
+    $("#watermark input").attr("checked", true);
+    if (canvasrecord.getItemById("watermark")) {
+      canvasrecord.getItemById("watermark").set({opacity: 0});
+      canvasrecord.renderAll();
     }
-    $.post("api.php", {request:"check-subscription", id:id}, function(data){
-      if (data == "active") {
-				window.setTimeout(function(){
-					premiumuser = true;
-					$(".pro-label").addClass("premium-on");
-					$(".pro-label").css({display:"none"});
-					$("#watermark input").attr("disabled", false);
-					$("#watermark input").attr("checked", true);
-					$("#copy").css({display:"none"});
-					if (canvasrecord.getItemById("watermark")) {
-						canvasrecord.getItemById("watermark").set({opacity: 0});
-						canvasrecord.renderAll();
-					}
-				}, 100);
-      }
-    })
   }
 
   function saveSubscription(subscription) {
-     $.post("api.php", {request:"get-subscription", id:subscription}, function(data){
+     $.post("/api/subscription.php", {request:"get-subscription", id:subscription}, function(data){
         data = JSON.parse(data);
         var updateurl = data[0];
         var cancelurl = data[1];
@@ -120,18 +100,14 @@ $(document).ready(function(){
      });
   }
 
-  Paddle.Setup({
-    vendor: 137741,
-    eventCallback: function(data) {
-      // The data.event will specify the event type
-      if (data.event === "Checkout.PaymentComplete") {
-        checkoutComplete(data);
-      }
-      else if (data.event === "Checkout.Close") {
-
-      }
-    }
-  });
+  // Paddle removed - premium features enabled by default
+  // Auto-enable premium features on page load
+  window.setTimeout(function() {
+    premiumuser = true;
+    $(".pro-label").addClass("premium-on");
+    $(".pro-label").css({display:"none"});
+    $("#watermark input").attr("disabled", false);
+  }, 1000);
 
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
@@ -164,12 +140,8 @@ $(document).ready(function(){
           updateurl = doc.data().updateurl;
           checkSubscription(doc.data().subscription);
         } else {
-          Paddle.Checkout.open({
-          	product: 743638,
-          	passthrough: '{"user_id": '+uid+'}',
-            successCallback: "checkoutComplete",
-            closeCallback: "checkoutClosed"
-          });
+          // Auto-enable premium features
+          checkoutComplete();
         }
       })
     })
@@ -1603,7 +1575,7 @@ $(document).ready(function(){
   }
 
   function showUpgradePopup() {
-    $("#upgrade-modal").html('<img id="close-upgrade" src="assets/close.svg"><div id="upgrade-emoji">&#10024;</div><div id="upgrade-title">Go PRO</div><div id="upgrade-subtitle">Make the most out of Animockup.</div><div id="upgrade-price">$10<span>/month</span></div><hr><div id="upgrade-items"><div class="upgrade-item"><img src="assets/check.svg"> Remove the watermark</div><div class="upgrade-item"><img src="assets/check.svg"> Access more device mockups</div><div class="upgrade-item"><img src="assets/check.svg"> MP4 and GIF export</div><div class="upgrade-item"><img src="assets/check.svg"> High quality export</div><div class="upgrade-item"><img src="assets/check.svg"> Support the developer</div></div><div id="upgrade-button" class="paddle_button" data-product="743638" data-theme="none">Upgrade</div><div id="sign-in-already">Already have an account? <span id="sign-in-2">Sign in</span></div>');
+    $("#upgrade-modal").html('<img id="close-upgrade" src="assets/close.svg"><div id="upgrade-emoji">&#10024;</div><div id="upgrade-title">Premium Features</div><div id="upgrade-subtitle">All premium features are now included for free!</div><div id="upgrade-items"><div class="upgrade-item"><img src="assets/check.svg"> Watermark removed</div><div class="upgrade-item"><img src="assets/check.svg"> All device mockups available</div><div class="upgrade-item"><img src="assets/check.svg"> MP4 and GIF export enabled</div><div class="upgrade-item"><img src="assets/check.svg"> High quality export enabled</div><div class="upgrade-item"><img src="assets/check.svg"> Enjoy creating!</div></div><div id="upgrade-button" onclick="hideUpgradePopup(); checkoutComplete();">Continue</div>');
     $("#upgrade-popup").addClass("show-upgrade");
     hideUserDropdown();
   }
@@ -1614,11 +1586,9 @@ $(document).ready(function(){
 
   function showUserDropdown() {
     if (!signedin) {
-      $("#user-settings-dropdown").html('<div class="user-option" id="upgrade-dropdown">Upgrade to PRO</div><div class="user-option" id="log-in">Log in</div>');
-    } else if (signedin && !premiumuser) {
-      $("#user-settings-dropdown").html('<div class="user-option" id="upgrade-dropdown">Upgrade to PRO</div><div class="user-option" id="log-out">Log out</div>');
-    } else if (signedin && premiumuser) {
-      $("#user-settings-dropdown").html('<a href="'+updateurl+'" class="user-option">Update details</a><a href="'+cancelurl+'" class="user-option">Cancel subscription</a><div class="user-option" id="log-out">Log out</div>');
+      $("#user-settings-dropdown").html('<div class="user-option" id="log-in">Log in</div>');
+    } else {
+      $("#user-settings-dropdown").html('<div class="user-option" id="log-out">Log out</div>');
     }
     $("#user-settings-dropdown").addClass("show-user-settings");
   }
