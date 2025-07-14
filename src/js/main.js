@@ -1597,13 +1597,6 @@ $(document).ready(function(){
     $("#user-settings-dropdown").removeClass("show-user-settings");
   }
 
-  function showHelp() {
-    $("#help-dropdown").addClass("help-show");
-  }
-
-  function hideHelp() {
-    $("#help-dropdown").removeClass("help-show");
-  }
 
   function toggleWatermark(e) {
     if (!premiumuser) {
@@ -1774,10 +1767,6 @@ $(document).ready(function(){
         text_color.hide();
     }
     if (!$("#user-settings").is(e.target) && $("#user-settings").has(e.target).length === 0 && !$("#user-settings-dropdown").is(e.target) && $("#user-settings-dropdown").has(e.target).length === 0) {
-        showHelp();
-    }
-    if (!$("#help").is(e.target) && $("#help").has(e.target).length === 0 && !$("#help-dropdown").is(e.target) && $("#help-dropdown").has(e.target).length === 0) {
-        hideHelp();
     }
     if (!$("#user-settings").is(e.target) && $("#user-settings").has(e.target).length === 0 && !$("#user-settings-dropdown").is(e.target) && $("#user-settings-dropdown").has(e.target).length === 0) {
         hideUserDropdown();
@@ -1851,7 +1840,6 @@ $(document).ready(function(){
   $(document).on("click", "#user-settings", showUserDropdown);
   $(document).on("click", "#log-out", logOut);
   $(document).on("mousedown", ".option", checkPROOption);
-  $(document).on("click", "#help", showHelp);
   $(document).on("click", "#sign-in-2", showSignIn);
   $(document).on("click", "#copy", showUpgradePopup);
 });
